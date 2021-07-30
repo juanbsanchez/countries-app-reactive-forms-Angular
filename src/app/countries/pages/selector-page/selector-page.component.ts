@@ -20,6 +20,7 @@ export class SelectorPageComponent implements OnInit {
   // fill selectors
   regions: string[] = [];
   countries: CountriesSmall[] = [];
+  borders: string[] = [];
   constructor(
     private countriesService: CountriesService,
     private fb: FormBuilder) { }
@@ -50,8 +51,15 @@ export class SelectorPageComponent implements OnInit {
     
     //When change country
     this.myForm.get('country')?.valueChanges
-      .subscribe(code => {
-        console.log(code);
+      .pipe(
+        tap(() => {
+          this.borders = [];
+          this.myForm.get('border')?.reset('');
+        }),
+        switchMap(code => this.countriesService.getCountryByCode(code))
+      )
+      .subscribe(country => {
+        this.borders = country?.borders || [];
       });
   }
 

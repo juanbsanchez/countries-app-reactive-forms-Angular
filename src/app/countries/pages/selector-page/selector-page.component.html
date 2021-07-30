@@ -35,6 +35,22 @@
         </div>
     </div>
     
+
+    <!-- Borders -->
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Frontera:</label>
+            <select 
+            formControlName="border"
+            class="form-control">
+                <option value=""> -- Seleccione el país fronterizo --</option>
+                <option 
+                *ngFor="let border of borders"
+                [value]="border">{{ border | titlecase }}</option>
+            </select>
+        </div>
+    </div>
+
 </form>
 
 <div class="ro">

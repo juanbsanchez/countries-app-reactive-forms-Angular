@@ -30,6 +30,6 @@ export class CountriesService {
       return of(null);
     }
     const url = `${this._baseUrl}/alpha/${code}`;
-    return this.http.get('url');
+    return this.http.get(url);
   }
 }
